@@ -32,18 +32,21 @@ and (max-width: 1000px){
 and (min-width: 600px) 
 and (max-width: 800px){
 	.software {
-	width: 70px;
-	height: 600px;
-	background:url("software.png") 0px -600px;
+	width: 720px;
+	height: 630px;
+	background:url("software.png") 0px -580px;
 	}	
 }
 @media screen 
 and (max-width: 600px) {
 	.software {
-	width: 500px;
-	height: 600px;
-	background:url("software.png") -700px -600px;
+	width: 490px;
+	height: 630px;
+	background:url("software.png") -720px -580px;
 	}	
 }
+
+
+
 
 
