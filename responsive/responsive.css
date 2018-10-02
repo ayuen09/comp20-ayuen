@@ -3,7 +3,7 @@
 and (min-width: 1200px){
 	.software {
 	width: 450px;
-	height: 600px;
+	height: 580px;
 	background:url("software.png") 0px 0px;
 	}
 }
@@ -13,8 +13,8 @@ and (min-width: 1000px)
 and (max-width: 1200px){
 	.software {
 	width: 430px;
-	height: 600px;
-	background:url("software.png") -400px 0px;
+	height: 580px;
+	background:url("software.png") -440px 0px;
 	}	
 }
 
@@ -23,8 +23,8 @@ and (min-width: 800px)
 and (max-width: 1000px){
 	.software {
 	width: 350px;
-	height: 600px;
-	background:url("software.png") -900px 0px;
+	height: 580px;
+	background:url("software.png") -860px 0px;
 	}	
 }
 
@@ -32,7 +32,7 @@ and (max-width: 1000px){
 and (min-width: 600px) 
 and (max-width: 800px){
 	.software {
-	width: 720px;
+	width: 70px;
 	height: 600px;
 	background:url("software.png") 0px -600px;
 	}	
@@ -40,9 +40,9 @@ and (max-width: 800px){
 @media screen 
 and (max-width: 600px) {
 	.software {
-	width: 490px;
+	width: 500px;
 	height: 600px;
-	background:url("software.png") -700px -6-0px;
+	background:url("software.png") -700px -600px;
 	}	
 }
 
