@@ -5,12 +5,14 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link href = "style.css" rel="stylesheet">
-  </head>
-  <body>
-    <div id="map"></div>
     <script src="JavaScript.js">
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBixXFjW8iUGZWoT_pPjosYKnehy2C-dRk&callback=initMap"
     async defer></script>
+  </head>
+  <body onload="initMap()">
+
+    <div id="map"></div>
+    
   </body>
 </html>
