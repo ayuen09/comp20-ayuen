@@ -76,18 +76,21 @@ var Quincy_C = {lat: 42.251809 , lng: -71.005409};
 var Quincy_A = {lat: 42.233391 , lng: -71.007153};
 var Braintree = {lat: 42.2078543 , lng: -71.0011385};
 
-  var locations = [['andrew', 42.330154, -71.057655, 0 ],
+/*  var locations = [['andrew', 42.330154, -71.057655, 0 ],
   ['porter_sq', 42.3884, -71.057655, 1],
-  ['harvard_sq', 42.373362, -71.118956, 2]];
+  ['harvard_sq', 42.373362, -71.118956, 2]];*/
+var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 
 
+var me = new google.maps.LatLng(myLat, myLng);
+var infowindow = new google.maps.InfoWindow();
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
-  var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
   // The map, centered at Uluru
   var map = new google.maps.Map(
       document.getElementById('map'), {zoom: 12, center: S_station, map: map, icon: image});
+  getMyLocation();
   // The marker, positioned at Uluru
   var marker = new google.maps.Marker({position: S_station, map: map, icon: image});
   var m_Andrew = new google.maps.Marker({position: Andrew, map: map, icon: image});
@@ -154,9 +157,45 @@ var roadTrip2 = new google.maps.Polyline({
 	strokeWeight: 2
   });
   roadTrip2.setMap(map);
+
+}
+
+
+
+ function getMyLocation() {
+ 	console.log("1");
+	if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
+		console.log("3");
+		navigator.geolocation.getCurrentPosition(function(position) {
+			console.log("here2");
+			myLat = position.coords.latitude;
+			myLng = position.coords.longitude;
+			renderMap();
+		});
+	}
+	else {
+		alert("Geolocation is not supported by your web browser.  What a shame!");
+	}
+}
+
+function renderMap() {
+	me = new google.maps.LatLng(myLat, myLng);
+	// Update map and go there...
+	map.panTo(me);
+	
+	// Create a marker
+	var marker = new google.maps.Marker({
+		position: me,});
+	marker.setMap(map);
+}
+				/*// Open info window on click of marker
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.setContent(marker.title);
+					infowindow.open(map, marker);
+				});
+			}*/
   /*for (i = 0; i < locations.length; i++) {  
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map
       });*/
-}
