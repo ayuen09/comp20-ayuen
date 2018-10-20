@@ -79,20 +79,25 @@ var Braintree = {lat: 42.2078543 , lng: -71.0011385};
 /*  var locations = [['andrew', 42.330154, -71.057655, 0 ],
   ['porter_sq', 42.3884, -71.057655, 1],
   ['harvard_sq', 42.373362, -71.118956, 2]];*/
-var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-
-
+var image = 'beachflag.png';
+var myLat = 0;
+var myLng = 0;
+var map;
 var me = new google.maps.LatLng(myLat, myLng);
 var infowindow = new google.maps.InfoWindow();
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
   // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 12, center: S_station, map: map, icon: image});
+  map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 11, center: S_station, map: map/*, icon: image*/});
   getMyLocation();
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: S_station, map: map, icon: image});
+ placeMarker(map);
+ redLine(map);
+
+}
+function placeMarker(map){
+	 var marker = new google.maps.Marker({position: S_station, map: map, icon: image});
   var m_Andrew = new google.maps.Marker({position: Andrew, map: map, icon: image});
   var m_Porter_sq = new google.maps.Marker({position: Porter_sq, map: map, icon: image});
   var m_Harvard_sq = new google.maps.Marker({position: Harvard_sq, map: map, icon: image});
@@ -116,7 +121,9 @@ function initMap() {
   var m_Braintree = new google.maps.Marker({position: Braintree, map: map, icon: image});
 
 
-  var roadTripCoor = [{lat: 42.395428 , lng: -71.142483},
+}
+function redLine(map){
+	var roadTripCoor = [{lat: 42.395428 , lng: -71.142483},
 	{lat: 42.39674 , lng: -71.121815},
 	{lat: 42.3884, lng: -71.11914899999999},
 	{lat: 42.373362 , lng: -71.118956},
@@ -143,8 +150,8 @@ function initMap() {
   });
     roadTrip.setMap(map);
 
-  var roadTripCoor2 = [{lat: 42.320685 , lng: -71.052391},
-  {lat: 42.275275 , lng: -71.029583},
+var roadTripCoor2 = [{lat: 42.320685 , lng: -71.052391},
+{lat: 42.275275 , lng: -71.029583},
 {lat: 42.2665139 , lng: -71.0203369},
 {lat: 42.251809 , lng: -71.005409},
 {lat: 42.233391 , lng: -71.007153},
@@ -157,20 +164,18 @@ var roadTrip2 = new google.maps.Polyline({
 	strokeWeight: 2
   });
   roadTrip2.setMap(map);
-
 }
-
 
 
  function getMyLocation() {
  	console.log("1");
 	if (navigator.geolocation) { // the navigator.geolocation object is supported on your browser
-		console.log("3");
+		console.log("2");
 		navigator.geolocation.getCurrentPosition(function(position) {
-			console.log("here2");
+			console.log("3");
 			myLat = position.coords.latitude;
 			myLng = position.coords.longitude;
-			renderMap();
+			renderMap(myLat, myLng);
 		});
 	}
 	else {
@@ -178,7 +183,7 @@ var roadTrip2 = new google.maps.Polyline({
 	}
 }
 
-function renderMap() {
+function renderMap(myLat, myLng) {
 	me = new google.maps.LatLng(myLat, myLng);
 	// Update map and go there...
 	map.panTo(me);
@@ -187,13 +192,13 @@ function renderMap() {
 	var marker = new google.maps.Marker({
 		position: me,});
 	marker.setMap(map);
-}
-				/*// Open info window on click of marker
+
+				// Open info window on click of marker
 				google.maps.event.addListener(marker, 'click', function() {
 					infowindow.setContent(marker.title);
 					infowindow.open(map, marker);
 				});
-			}*/
+}
   /*for (i = 0; i < locations.length; i++) {  
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
