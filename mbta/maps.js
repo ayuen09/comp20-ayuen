@@ -83,17 +83,18 @@ var myLng = 0;
 var map;
 var me = new google.maps.LatLng(myLat, myLng);
 var infowindow = new google.maps.InfoWindow();
-var request = new XMLHttpRequest();
+//var request = new XMLHttpRequest();
 
 // Initialize and add the map
 function initMap() {
   // The location of Uluru
   // The map, centered at Uluru
-  map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 11, center: S_station, map: map/*, icon: image*/});
-  getMyLocation();
+ map = new google.maps.Map(
+ document.getElementById('map'), {zoom: 11, center: S_station, map: map, icon: image});
+ getMyLocation();
  placeMarker(map);
  redLine(map);
+
 
 }
 function placeMarker(map){
@@ -102,8 +103,10 @@ function placeMarker(map){
 			console.log(station);
 			var marker = new google.maps.Marker({position: station, map:mymap/*, icon: image*/
 	var marker = new google.maps.Marker({position: S_station, map: map, icon: image});
+  listen_stations(map, marker, 'South Station', 'place-sstat');
   var m_Andrew = new google.maps.Marker({position: Andrew, map: map, icon: image});
   var m_Porter_sq = new google.maps.Marker({position: Porter_sq, map: map, icon: image});
+  listen_stations(map, marker, 'Porter Square', 'place-portr');
   var m_Harvard_sq = new google.maps.Marker({position: Harvard_sq, map: map, icon: image});
   var m_JFK = new google.maps.Marker({position: m_JFK, map: map, icon: image});
   var m_Savin_Hill = new google.maps.Marker({position: Park_St, map: map, icon: image});
@@ -111,7 +114,7 @@ function placeMarker(map){
   var m_Broadway = new google.maps.Marker({position: Broadway, map: map, icon: image});
   var m_N_Quincy = new google.maps.Marker({position: N_Quincy, map: map, icon: image});
   var m_Shawmut = new google.maps.Marker({position: Shawmut, map: map, icon: image});
-  var m_Davis = new google.maps.Marker({position: Davis, map: map, )icon: image});
+  var m_Davis = new google.maps.Marker({position: Davis, map: map, icon: image});
   var m_Alewife = new google.maps.Marker({position: Alewife, map: map, icon: image});
   var m_MIT = new google.maps.Marker({position: MIT, map: map, icon: image});
   var m_MGH = new google.maps.Marker({position: MGH, map: map, icon: image});
@@ -123,6 +126,9 @@ function placeMarker(map){
   var m_Fields_C = new google.maps.Marker({position: Fields_C, map: map, icon: image});
   var m_Central_sq = new google.maps.Marker({position: Central_sq, map: map, icon: image});
   var m_Braintree = new google.maps.Marker({position: Braintree, map: map, icon: image});
+
+	//google.maps.event.addListener(marker, 'click', stationInfo('South Station', 'place-sstat'));
+
 }
 
 function redLine(map){
@@ -195,18 +201,74 @@ function renderMap(myLat, myLng) {
 
 	// Open info window on click of marker
 	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.setContent(marker.title);
+		var infowindow = new google.maps.InfoWindow();
+		console.log("this too");
+		infowindow.setContent("marker");
 		infowindow.open(map, marker);
 	});
 }
 
-function closestStation(myLat, myLng){
-
+function listen_stations(map, marker, station, stop_id){
+	google.maps.event.addListener(marker, 'click', function(){
+		stationInfo(station, stop_id);
+	});
 }
 
+function stationInfo(station_name, stop_id){
+	/* Step 1: Make instance of XHR object...
+		...to make HTTP request after page is loaded*/
+		var request = new XMLHttpRequest();
+		var infowindow = new google.maps.InfoWindow();
+		console.log("Hit me 1");
+		// Step 2: Open the JSON file at remote location
+		request.open("GET", "https://chicken-of-the-sea.herokuapp.com/redline/schedule.json?stop_id=" + stop_id, true);
+		console.log(stop_id);
+		infowindow.setContent("<p> Loading... </p>");
+	request.onreadystatechange = function(){
+			console.log("Hit me 3");
+			if(request.readyState == 4 && request.status != 200) {
+				infowindow.setContent("<p> Something went wrong </p>");
+			}
+			else if (request.readyState == 4 && request.status == 200) {
+				// Step 5: when we get all the JSON data back, parse it and use it
+				theData = request.responseText;
+				messages = JSON.parse(theData);
+				var content = "<h2>"+ station_name + "</h2>";
+				theData.data.forEach(function(data){
+					var dep, arr; 
+					var arr_time = data.attributes.arrival_time;
+					var dep_time = data.attributes.departure_time;
+					var bound = data.attributes.direction_id;
+					var bounded_for;
+					if(dep_time == null){
+						dep = "Not Available";
+					}
+					else{
+						dep = dep_time;
+					}
+					if(arr_time == null){
+						arr = "Not Available";
+					}
+					else{
+						arr = arr_time;
+					}
+					if(bound == 0){
+						bounded_for = "Southbound";
+					}
+					else {
+						bounded_for = "Northbound";
+											}
+					content += "<h3>"+ "Arrival time: " + "</h3>" + "<h4>" + arr	
+					+ "</h4>" + "<br>" +"<h3>"+ "Departure time: " + "</h3>" + 
+					"<h4>"+ dep	+ "</h4>" + "<br>" +"<h3>"+ "Bounded for: "+ "</h3>" +
+					 "<h4>"+ bounded_for+ "</h4>" ;	
+					});
+				}
+				else{
+					console.log("In progress...");
+				}
 
-  /*for (i = 0; i < locations.length; i++) {  
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-        map: map
-      });*/
+
+
+}
+}
