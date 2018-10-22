@@ -1,49 +1,12 @@
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <link href = "style.css" rel="stylesheet">
-    <script src="maps.js"> 
-    </script> 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJFdJ5kYHeqPYn3fBNUmgkuCMwBQEVEwE&callback=initMap"
-    async defer></script>
-  </head>
-  <body onload="initMap()">
-  	<script>
-  		var myLat = 0;
-		var myLng = 0;
-		var me = new google.maps.LatLng(myLat, myLng);
-		var myOptions = {
-			zoom: 13, // The larger the zoom number, the bigger the zoom
-			center: me,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		};
-		var map;
-		var marker;
-		var infowindow = new google.maps.InfoWindow();
-
-		function initMap() {
-				map = new google.maps.Map(document.getElementById("map"), myOptions);
-		}
-  	</script>
-
-    <div id="map"></div>
-    
-  </body>
-</html> -->
-
 <!DOCTYPE html>
 <html>
   <head>
     <link href = "style.css" rel="stylesheet">
-    <title>Simple Map</title>
+    <title>Map</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="UTF-8">
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJFdJ5kYHeqPYn3fBNUmgkuCMwBQEVEwE&callback=initMap">
-    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBixXFjW8iUGZWoT_pPjosYKnehy2C-dRk&callback=initMap"></script> 
     <script src="maps.js">
 
     </script>
@@ -53,3 +16,6 @@
     <div id="map"></div>
   </body>
 </html>
+
+<!--   <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+  type="text/javascript"></script> -->
