@@ -197,7 +197,7 @@ function stationInfo(station_name, stop_id){
 			height: 200
 		});
 		// Open the JSON file at remote location
-		request.open("GET", "https://chicken-of-the-sea.herokuapp.com/redline/schedule.json?stop_id=place-davis", true);
+		request.open("GET", "https://chicken-of-the-sea.herokuapp.com/redline/schedule.json?stop_id=" + stop_id, true);
 		infowindow.setContent("<p> Loading... </p>");
 	request.onreadystatechange = function(){
 			if(request.readyState == 4 && request.status != 200) {
@@ -215,32 +215,49 @@ function stationInfo(station_name, stop_id){
 					var dep_time = data.attributes.departure_time;
 					var bound = data.attributes.direction_id;
 					var bounded_for;
-					if(dep_time == null){
-						dep = "Not Available";
-					}
-					else{
-						dep = dep_time.split("T");
-					}
+					content += "Arrival time: " ;
 					if(arr_time == null){
 						arr = "Not Available";
+						content += arr;
 					}
 					else{
 						arr = arr_time.split("T");
+						content += arr[1];
 					}
+					content += " <br>";
+					content +=  "Departure time: " ;
+					if(dep_time == null){
+						dep = "Not Available";
+						content += dep;
+					}
+					else{
+						dep = dep_time.split("T");
+						content += dep[1];
+					}
+					content += " <br>";
+					content += "Bounded for: ";
 					if(bound == 0){
 						bounded_for = "Southbound";
+						content += bounded_for;
 					}
-					else {
+					else if(bound == 1){
 						bounded_for = "Northbound";
+						content += bounded_for;
 											}
-					content += "<div id = 'content'>" +"<h3>"+ "Arrival time: " + "</h3>" + "<h4>" + arr[1]	+
-					 "</h4>" + "<h3>"+ "Departure time: " + "</h3>" + 
-					"<h4>"+ dep[1]	+ "</h4>" + "<br>" +
-					"<h3>"+ "Bounded for: "+ "</h3>" +
-					 "<h4>"+ bounded_for+ "</h4>" + "<br>"+ "</div>" ;	
-					});
-				}
-
+					else{
+						bound_for = "Not Available";
+						content += bounded_for;
+					}
+					content += " <br>";
+					content += " <br>";
+					// content += "<h3>"+ "Arrival time: " + "</h3>" + "<h4>" + arr	+
+					//  "</h4>" + "<h3>"+ "Departure time: " + "</h3>" + 
+					// "<h4>"+ dep+ "</h4>" + "<br>" +
+					// "<h3>"+ "Bounded for: "+ "</h3>" +
+					//  "<h4>"+ bounded_for+ "</h4>" + "<br>"+ "</div>" ;	
+					// });
+				});
+}
 				infowindow.setContent(content);
 
 		}
