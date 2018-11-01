@@ -9,10 +9,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type = "text/javascript">
         $(document).ready(function(){
-            $.get("file:///C:/Users/wings/Desktop/comp/comp20/comp20-ayuen/captainslog/index.html", function(data) {
-                $("#info").html(JSON.stringify(data));
-                console.log(info);
-        })
+            if(localStorage.length > 0){
+                var s = "";
+                for(i = localStorage.length-1; i >= 0 ; i--){
+                    s += localStorage.getItem(localStorage.key(i)) + "</br>";
+                }
+                $('#log').html(s);
+            }
+
+            $(document).keypress(function (event) {
+                var keycode = (event.keyCode ? event.keyCode: event.which);
+                if(keycode == '13'){
+                    input = $("#msg").val();
+                    time = new Date();
+                    value = time + ": " + input;
+                    localStorage.setItem(time, value);
+                    location.reload();
+                }
+            })
+        });
 
     </script>
 </head>
@@ -20,7 +35,6 @@
 <body>
     <h1>Captain's Log</h1>
     <h3>New entry: <input type="text" id="msg" name="msg" size="30" /></h3>
-    <div id="log">
-    </div>
+    <div id="log"></div>
 </body>
 </html>
