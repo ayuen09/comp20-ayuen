@@ -127,7 +127,7 @@ GameManager.prototype.moveTile = function (tile, cell) {
 
 // Move tiles on the grid in the specified direction
 GameManager.prototype.move = function (direction) {
-	
+	// 0: up, 1: right, 2: down, 3: left
 	var self = this;
 	if (this.isGameTerminated()) {
 		var username = prompt("Enter your name: ");
