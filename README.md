@@ -1,12 +1,14 @@
 Anna Yuen
-UTLN: ayuen02
+
 
 This Git repository contains my work for comp20:Web Programming. 
 
-My favority lab/assignment is Assignment 2: MBTA schedule. It was the first time I got to use an API and I learned how easy to use yet has many complex functions. 
+My favority lab/assignment is Assignment 2: MBTA schedule. It was the first time I got to use an API and I learned how easy it is to use yet it has many complex functions. 
 
-Throughout this course, I think I learned a lot yet I also feel like I have not learned not much at all. I look at the labs and assignments and see what I have done. While I can use these tools and apply it to different projects, I barely understand how these tools work or how it interacts with other APIs. From day 1 to now, I think I became much more of an active programmer and I learned a lot about the industry through this class.
+Throughout this course,I feel I have grown a lot as a programmer and also as a student. I gained new insights not only how to use the basic tools to create powerful and usefule websites but also on this industry as a whole. I now have a much better idea of the kinds of the work that is produced in this field and the different possibilities I can explore. 
 
-The most important thing I learned in this course is how to tackle large complicated projects by modularizing into smaller task and accomplishing them with different APIs. I use to be overwhelmed by the complexity and unfamiliarity of a tool but now I have learned to not be intimidated by the task and tackle it step by step. 
-*One example of such is Assignment 3. I was unfamiliar with the concepts of databases and how it interacts with the server and clients. I had no idea where to start and was buried with an amount of resources that I do not understand. However, I started to try out different methods and examples I had got from class or from the internet even if I have not yet understood the example. Eventually, working each function one at a time, I acheived the final product
-*Another example is with the MBTA assignment. In this assignment, it was the first time I was using an API and I was unfamiliar with it at the time.
+The most important thing I learned in this course is the basics of networking and HTTP protocols. All of our projects involve some understanding of how our computers communicate with other servers and this basic understand helped me work through many assignments. 
+On Assignment 2, it was the first time I used the GET method to retreive data from a server. Without the understanding of how the data is retreived from the server, it would have been difficult to complete this assignment.
+On lab 8, it was the first time I used both the GET and POST methods to get data and to send data back to the the user. Through this lab, I was able to further understand the importance of knowing these two methods and how important these methods are to the functionalities of a website. 
+
+I would like to dive deeper into web security. It is the last thing we discussed in class but it seems like one of the most useful things to learn more about both for creating a website. I was intrigued by the simple but effective ways to "break" a website and I want to explore more about this topic.
