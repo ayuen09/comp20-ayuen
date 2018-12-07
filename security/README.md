@@ -4,4 +4,4 @@ All parts of the work have been correctly implemented. I identified 3 issues wit
 
 TA: Michael Robinson
 
-Hours worked on: 1.5 hours
+Hours worked on: 3 hours
