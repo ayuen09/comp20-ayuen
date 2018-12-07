@@ -15,12 +15,12 @@
 	<hr>
 
 	<h2>Methodology:</h2>
-	<p> I first black box tested with different methods of user input. I used user input through the game input, through the get command and through curl data get gain access into the website. Then I looked over the script an checked for any valunerabilities within the code.</p>
+	<p> I first black box tested with different methods of user input. I used the game username input, the query string from the get command and curled data to get gain access into the website. Then I looked over the script and checked for any vulunerabilities within the code.</p>
 
 	<hr>
 
 	<h2>Abstract of Findings:</h2>
-	<p> Most of the issues found on this site is due to the lack of validation of user input and unrestricted access to the data stored on this website. Thus, the user can input anything that performs an action that can expose sensitive data stored on this website. </p>
+	<p> Most of the issues found on this site is due to the lack of validation of user input and unrestricted access to the data stored in the database. Thus, the user can input anything that performs an action that can expose sensitive data stored on this website. </p>
 
 	<hr>
 
@@ -29,19 +29,21 @@
 		<li>Database Injection:</li>
 		<ul>
 			<li> I inputted "https://hidden-shore-46684.herokuapp.com/scores.json?username[$ne]=batman". Below is the screenshot of the results.</li>
+			<li>This issue was found on the scores.json page.</li>
 			<li>This is an issue of high severity because it allows any user to input unrelated query strings to get more information than is intended for user to access. Information that is stored in the database can be important classification.</li>
-			<li>Solutions: can strip special characters on user input so that the script does not execute the query string. </li>
+			<li>Solutions: strip special characters on user input so that the script does not execute the query string. </li>
 			</li>
 		</ul>
 		<img src = "DB injection.jpg">
 
 		<hr>
 
-		<li>Cross Site Scripting:</li>
+		<li>Cross Site Scripting: </li>
 		<ul>
 			<li>I inputted "&ltscript&gt alert(‘hello’)&lt/script&gt" into the user input of the name textbox from the 2048 game page. The photo below is what happened when I went to the web page.</li>
+			<li>Through my input, I was able to have an alert box pop up on the web page.</li>
 			<li>This is an issue of high severity because it allows any user to input anything that can execute an action into the database.</li>
-			<li>Solution: can stript special characters when data is inputted into the database. </li>
+			<li>Solution: can stript special characters when data is inputted into the database. For example, change <  to &amp;lt; and change > to &amp;gt; That way, no action can be executed based on the input. </li>
 		</ul>
 		<img src = "Database injection (1).jpg">
 
@@ -49,7 +51,7 @@
 
 		<li>Unrestricted CORS:</li>
 		<ul>
-			<li>I examined the code and saw that the web app requires CORS. This allows anyone to access to do things in the app without authentication.</li>
+			<li>I examined the code and saw that the web app requires CORS (shown in picture below). This allows anyone to access to do things in the app without authentication.</li>
 			<li>I curled in data that redirects the website to a comp20 page</li>
 			<li>This is an issue of high severity because it allows anyone to access the data. For example, it allowed me to perform an injection attack through curling an invalid input.</li>
 			<li>Solution: specify the user by "Access-Control-Allow-Origin: "url". That way only that url can have access to the data. </li>
@@ -58,13 +60,15 @@
 	</ul>
 
 	<h2>Conclusion: </h2>
-  	<p>I recommend to validate each point of user input especially around username input and query string input. This will prevent your website from executing any script outside of your scripts</p>
+  	<p>I recommend to validate each point of user input especially around username input and query string input. This will prevent your website from executing any input outside of your scripts. </p>
 
   	<h2>References: </h2>
   	<p>XSS: </p>
   	<a href="https://www.veracode.com/security/xss"> link</a>
   	<p>Vulnerabilities of CORS: </p>
   	<a href = "https://www.owasp.org/index.php/CORS_OriginHeaderScrutiny"> link </a>
+  	<p>Top 10 Vulnerabilities:</p>
+  	<a href = "https://www.owasp.org/index.php/Top_10_2013-Top_10"> link</a>
 </body>
 </html> 
 
